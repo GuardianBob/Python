@@ -1,0 +1,89 @@
+Z:\CodingDojo\Python\my_environments>call pyEnv\Scripts\activate    <-- Activates the virtual environment called.
+
+(pyEnv) Z:\CodingDojo\Python\my_environments>pip install Django==1.11.9     <-- Installs Django and teh dependencies
+Collecting Django==1.11.9
+  Using cached Django-1.11.9-py2.py3-none-any.whl (6.9 MB)
+Requirement already satisfied: pytz in \\jedi-temple\documents\codingdojo\python\my_environments\pyenv\lib\site-packages (from Django==1.11.9) (2021.1)
+Installing collected packages: Django
+Successfully installed Django-1.11.9
+
+(pyEnv) Z:\CodingDojo\Python\my_environments>pip list       <-- Lists all packages installed in the virtual environment
+Package    Version
+---------- -------
+Django     1.11.9
+pip        21.0.1
+pytz       2021.1
+setuptools 49.2.1
+
+(pyEnv) Z:\CodingDojo\Python\my_environments>deactivate     <-- deactivates the virtual environment
+Z:\CodingDojo\Python\my_environments>pip list
+Package Version
+------- -------
+pip     21.0.1
+
+Z:\CodingDojo\Python\my_environments>call pyEnv\Scripts\activate
+
+(pyEnv) Z:\CodingDojo\Python\my_environments>pip install Django==1.11.9     <-- Verifies what is currently installed before new installations
+Requirement already satisfied: Django==1.11.9 in \\jedi-temple\documents\codingdojo\python\my_environments\pyenv\lib\site-packages (1.11.9)
+Requirement already satisfied: pytz in \\jedi-temple\documents\codingdojo\python\my_environments\pyenv\lib\site-packages (from Django==1.11.9) (2021.1)
+
+(pyEnv) Z:\CodingDojo\Python\my_environments>pip freeze     <-- displays installed packages in requirements format
+Django==1.11.9
+pytz==2021.1
+
+(pyEnv) Z:\CodingDojo\Python\my_environments>C:
+
+(pyEnv) C:\Users\J-Bear\Desktop>pip freeze > requirements.txt      <-- Generates a text file listing the installed packages
+
+(pyEnv) C:\Users\J-Bear\Desktop>ls
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+(pyEnv) C:\Users\J-Bear\Desktop>dir
+ Volume in drive C has no label.
+ Volume Serial Number is 9CE8-1E31
+
+ Directory of C:\Users\J-Bear\Desktop
+
+03/07/2021  05:18 PM    <DIR>          .
+03/07/2021  05:18 PM    <DIR>          ..
+02/14/2020  06:20 AM             2,677 Autodesk Fusion 360.lnk
+11/06/2020  10:01 AM               270 Borderlands 3.url
+11/05/2020  08:33 AM             2,048 brave - SB.exe - Shortcut.lnk
+11/06/2020  11:30 AM               265 Darksiders Warmastered Edition.url
+03/07/2021  10:48 AM             2,360 GitHub Desktop.lnk
+02/21/2020  01:35 PM             2,823 Google Keep.lnk
+02/25/2020  09:07 PM             3,089 Messages.lnk
+02/21/2020  01:35 PM             2,819 Messenger.lnk
+02/21/2020  01:35 PM             3,139 Play Music.lnk
+03/07/2021  05:18 PM                30 requirements.txt
+03/17/2020  08:57 AM             1,183 Sandboxed Brave.lnk
+02/14/2020  08:22 AM             1,135 Sandboxed FDM.lnk
+02/14/2020  08:22 AM             1,123 Sandboxed Firefox.lnk
+02/14/2020  07:36 AM               937 Sandboxed Web Browser.lnk
+12/19/2020  10:43 AM             3,139 SoundCloud.lnk
+03/02/2021  10:48 AM             7,463 sources.xml
+02/25/2021  01:18 PM    <DIR>          test
+12/01/2020  07:39 AM             2,228 Vysor.lnk
+02/22/2021  06:53 PM             2,164 WeMod.lnk
+              18 File(s)         38,892 bytes
+               3 Dir(s)  364,601,188,352 bytes free
+
+(pyEnv) C:\Users\J-Bear\Desktop>z:
+
+(pyEnv) Z:\CodingDojo\Python\my_environments>pip uninstall Django       <-- uninstalls specified package
+Found existing installation: Django 1.11.9
+Uninstalling Django-1.11.9:
+  Would remove:
+    \\jedi-temple\documents\codingdojo\python\my_environments\pyenv\lib\site-packages\django-1.11.9.dist-info\*
+    \\jedi-temple\documents\codingdojo\python\my_environments\pyenv\lib\site-packages\django\*
+    \\jedi-temple\documents\codingdojo\python\my_environments\pyenv\scripts\django-admin.exe
+    \\jedi-temple\documents\codingdojo\python\my_environments\pyenv\scripts\django-admin.py
+Proceed (y/n)? y
+  Successfully uninstalled Django-1.11.9
+
+(pyEnv) Z:\CodingDojo\Python\my_environments>pip show Django
+WARNING: Package(s) not found: Django
+
+(pyEnv) Z:\CodingDojo\Python\my_environments>deactivate
+Z:\CodingDojo\Python\my_environments>
