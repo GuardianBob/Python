@@ -210,3 +210,108 @@ for val in "string":
 
 #Functions
 #The def keyword signifies the declaration of a function.
+
+# Simple swap method:
+arr = [1,3,5,7]
+arr[0], arr[1] = arr[1], arr[0]
+
+# Bubble Swap
+# The following will loop through an array/list and sort from lowest to highest
+def bubbleSwap(lst1):
+    n = len(lst1)
+    for i in range(n-1):        #This will run through the full list once (from 0 to 5)
+        for j in range(n-i-1):      #This starts as 0 to 5 since i is at 0 for first run
+            # The first iteration will carry the largest number to the end.
+            # The second iteration only goes to the second to last number since the last is already the largest.
+            # Each iteration carries the largest number to the last number in the range
+            # Range 1: 0 - 5, 2: 0 - 4, 3: 0 - 3, etc.
+            if lst1[j] > lst1[j+1]:
+                lst1[j], lst1[j+1] = lst1[j+1], lst1[j]
+
+arr = [2, 6, 1, 5, 3, 4]
+arr2 = bubbleSwap(arr)
+print(arr)
+
+# *******************Ternary Operator  *******************
+# A ternary operator, or conditional expression, is an operator that takes 3 arguments. 
+# Most simply, they are a one line if-else statement. In many languages, 
+# we see this same functionality with the symbols ? and :. In Python, the syntax is as follows:
+# <result_if_true> if <condition> else <result_if_false>
+# Example:
+
+# traditional
+if stacks >= 3:
+    print('Coding Dojo')
+else:
+    print('You are not Coding Dojo!')
+# *********ternary**********
+print('Coding Dojo' if stacks >= 3 else 'You are not Coding Dojo!')
+
+#***********************    Lambdas *******************
+# In Python, anonymous functions are created with the lambda keyword. These functions are used for various purposes:
+# they are handy in situations where we only need to use the function once
+# they are lightweight when we need to break down complex tasks into small, specific tasks
+# they are convenient as arguments to functions that require functions as parameters
+# Example:  defined:
+def square(num):
+    x = num ** 2
+    return x
+# Lambda that does the same as above:
+lambda num: num ** 2
+# Lambdas can take multiple arguments as well.  Example:
+lambda num1, num2: num1+num2
+# This takes two arguments and returns the sum of those args
+# Lambdas can be elements in a list as well
+
+# create a new list, with a lambda as an element
+my_list = ['test_string', 99, lambda x : x ** 2]
+# access the value in the list
+print(my_list[2]) # will print a lambda object stored in memory
+# invoke the lambda function, passing in 5 as the argument
+my_list[2](5)
+
+# define a function that takes one input that is a function
+def invoker(callback):
+    # invoke the input pass the argument 2
+    print(callback(2))
+invoker(lambda x: 2 * x)
+invoker(lambda y: 5 + y)
+
+# !!!!!!! Can be stored as variables
+add10 = lambda x: x + 10 # store lambda expression in a variable
+add10(2)  # returns 12
+add10(98) # returns 108
+
+# ********************* map() function ***************
+# Map basically maps a list to a function
+# Python program to demonstrate working 
+# of map. 
+
+# Return double of n 
+def addition(n): 
+	return n + n 
+
+# We double all numbers using map() 
+numbers = (1, 2, 3, 4)   
+result = map(addition, numbers)   # Maps the "numbers" list to the "addition" function 
+print(list(result)) 
+# result = addition(numbers)  <--------THis does not work here because the function can only accept a single argument
+
+# ***********************   Slicing     *********************
+# Allows for getting subset of values from a sequence
+# We indicate the starting index on the left and the ending index (exclusive) on the right. If we don't indicate a value on the left, it will start at index 0; if the value on the right is not specified, it will assume the length of the sequence.
+my_list = [99,4,2,5,-3]
+my_tuple = (99,4,2,5,-3)
+my_str = "sequoia"
+print(my_list[:])
+# output: [99,4,2,5,-3]
+print(my_tuple[1:])
+# output: (4,2,5,-3)
+print(my_str[:3])
+# output: "seq"
+print(my_tuple[2:4])
+# output: (2,5)
+print(my_list, my_tuple, my_str)
+# output: [99,4,2,5,-3] (99,4,2,5,-3) 'sequoia' -- note the original values have not changed
+
+
