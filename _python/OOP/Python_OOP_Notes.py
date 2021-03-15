@@ -60,3 +60,31 @@ print(monty.account_balance)	# output: 50
 
 
 #=======================================================================
+
+
+# MULTIPLE ARGUMENTS - Varying number of arguments to be accepted.
+# Placing an asterisk before the parameter allows for a varying number of arguments to be accepted
+# Example:
+def varargs(arg1, *args):
+    print("Got ", arg1, " and ", args)
+varargs("one") 			# output: Got one and ()
+varargs("one", "two") 	# output: Got one and ('two',)
+varargs("one", "two", "three") # output: Got one and ('two', 'three')
+
+# Nodes - A node is a class that is going to have two attributes:
+#   Value - the actual value to be stored
+#   Next - a link to the node next to it in the list
+
+# Example:
+class SLNode:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+# Next we need a class for the List:
+class SList:
+    def __init__(self):
+        self.head = None
+# Then an instance of the list is needed:
+my_list = SList()
+
+
