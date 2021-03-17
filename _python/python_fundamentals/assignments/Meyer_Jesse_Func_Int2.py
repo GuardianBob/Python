@@ -174,8 +174,8 @@ iterate_dictionary(students)
 # Tonel
 
 def iterate_dictionary2(key, some_list):
-  for curr_dict in some_list:
-    print(curr_dict[key])
+    for curr_dict in some_list:
+        print(curr_dict[key])
 
 iterate_dictionary2('first_name', students)
 iterate_dictionary2('last_name', students)
