@@ -26,3 +26,20 @@ def yet_another(request, name):         # name would be a string from the URL
     
 def one_more(request, id, color): 	    # id would be a number, and color a string from the URL
     pass                                # given the example above, id would be 17 and color would be 'brown'
+
+#==============================TEMPLATES=====================================
+
+#For storing your HTML files, Django expects a folder named exactly templates which we will need to create. 
+# Each app will have its own templates folder.
+# projName > appName > templates
+
+# Assuming we've got the folder structure set up properly, 
+# we can then render templates in our views.py folder like so:
+
+# project_name/app_name/views.py
+from django.shortcuts import render	# notice the import!
+def index(request):
+    return render(request, "index.html")
+
+# When we call the render function, our first argument will always be request, 
+# and the second argument will be a string indicating which html file to render.
