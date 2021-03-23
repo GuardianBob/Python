@@ -1,0 +1,83 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.wrapper {
+    margin: 10px auto;
+    width:  500px; 
+}
+
+.main {
+    width: 400px;
+    border: 1px solid;   
+    vertical-align: top;
+}
+
+.labels {
+    display: inline-block;
+    width: 150px;
+    height: 100px;
+    vertical-align: top;
+}
+
+label {
+    margin: 3px;
+}
+
+select {
+    width: 175px;
+    height: 26px;
+    margin: 5px 5px 0px 5px;
+    border: 1px solid;
+}
+
+input[type=radio] {
+    height: 12px;
+    width: 12px;
+}
+
+input[type=checkbox] {
+    height: 12px;
+    width: 12px;
+}
+
+input {
+    width: 175px;
+    height: 26px;
+    margin: 5px 5px 0px 5px;
+    border: 1px solid;
+}
+
+.input1 {
+    width: 190px;
+    height: 100px;
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid;
+}
+
+#form2 {    
+    width: 400px;
+    margin: 0px auto;
+    border: 1px solid;
+    padding: 5px 5px;
+}
+
+#comments {
+    width: 375px;
+    border: 1px solid;
+    margin: 5px;
+}
+
+#sBtn {
+    width: 100px;
+}
+
+p {
+    margin: 5px;
+}
+
+.undln {
+    text-decoration: underline;
+}

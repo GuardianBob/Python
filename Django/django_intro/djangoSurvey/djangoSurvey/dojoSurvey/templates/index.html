@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
+
+</head>
+<body>
+    <div class="wrapper">        
+        <div class="container-fluid">            
+            <form id="form2" name="form2" method="post" action="result">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Your Name:</label>
+                        <label>Dojo Location:</label>
+                        <label>Favorite Language:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input name="usrName" type="text" size="20px" /> 
+                        <select name="usrLoc">
+                            <option value="Seattle">Seattle</option>
+                            <option value="San Jose">San Jose</option>
+                            <option value="Los Angeles">Los Angeles</option>
+                        </select>
+                        <select name="usrLang">
+                            <option value="Python">Python</option>
+                            <option value="Java">Java</option>
+                            <option value="MERN">MERN</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="HTML">HTML</option>
+                        </select> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Class Type:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" id="online" name="class" value="Online">
+                        <label for="online">Online</label><br>
+                        <input type="radio" id="inPerson" name="class" value="In Person">
+                        <label for="inPerson">In Person</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Stacks Taking:</label>
+                    </div>                    
+                    <div class="col-md-6">
+                        <input type="checkbox" name="stacks" id="python" value="Python">
+                        <label for="python">Python</label><br>
+                        <input type="checkbox" name="stacks" id="java" value="Java">
+                        <label for="java">Java</label><br>
+                        <input type="checkbox" name="stacks" id="mern" value="Mern">
+                        <label for="mern">MERN</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Comment (Optional):</label>
+                        <textarea id="comments" name="comments" rows="4" cols="40"></textarea>
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <div class="col-md-4">
+                        <input id="sBtn" type="submit" value="Submit">
+                    </div>
+                </div>
+            </form>            
+        </div>
+    </div>
+</body>
+</html>

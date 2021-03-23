@@ -43,3 +43,35 @@ def index(request):
 
 # When we call the render function, our first argument will always be request, 
 # and the second argument will be a string indicating which html file to render.
+
+# Passing Data to the Template
+
+# In Django, we are also able to pass data to the template via the render method, 
+# but rather than being able to pass up any number of arguments, we can only pass 
+# a single dictionary whose keys will be the variable names available on the template. 
+# For example:
+
+# project_name/app_name/views.py     
+from django.shortcuts import render
+    
+def index(request):
+    context = {
+    	"name": "Noelle",
+    	"favorite_color": "turquoise",
+    	"pets": ["Bruce", "Fitz", "Georgie"]
+    }
+    return render(request, "index.html", context)
+
+# project_name/app_name/templates/index.html
+<h1>Info From Server:</h1>
+<p>Name: {{name}}</p>
+<p>Color: {{favorite_color}}</p>
+<p>Pets</p>
+<ul>
+{% for pet in pets %}
+   <li>{{pet}}</li>
+{% endfor %}
+</ul>
+
+# Note: You cannot use square brackets with Django's template engine! Instead, use dot notation. 
+# For example, array[0] becomes {{ array.0 }}
