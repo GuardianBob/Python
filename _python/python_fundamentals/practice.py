@@ -52,49 +52,19 @@
 
 # print(list(range(0, 100, 10)))
 
-class SList:
-    def __init__(self):
-        self.head = None
-    def add_to_front(self, val):
+# 
 
-        def add_to_front(self, val):
-            new_node = SList(val)
+import json, requests
 
+xUrl = 'https://pokeapi.co/api/v2/pokemon/5/'
+# y = json.loads(xUrl)
+# for i in y["moves"]: #["abilities"]:
+#     print(i["move"]["name"]) #["ability"]["name"])
 
-class SLNode:
-    def __init__(self, val):
-        self.value = val
-        self.next = None
+pUrl = requests.get(xUrl)
+cvt = pUrl.json()
+print(cvt['name'])
+# y = json.loads(pUrl.read())
+# print(y['name']) #["ability"]["name"])
 
-    def add_to_front(self, val):
-        new_node = SLNode(val)
-        current_head = self.head
-        new.node.next = current_head
-        self.head = new_node
-        return self
-
-    
-    def print_values(self):
-        runner = self.head
-        while (runner != None):
-            print (runner.value)
-            runner = runner.next
-        return self
-
-
-
-    def add_to_back(self, val):
-        if self.head == None:
-            self.add_to_front(val)
-            return self
-            
-        new_node = SLNode(val)
-        runner = self.head
-        while (runner.next != None):
-            runner = runner.next
-            runner.next = new_node
-        return self
-
-
-my_list = SList()
-my_list.add_to_front("are").add_to_front("Linked lists").add_to_back("fun!").print_values()
+users.objects.create(first_name)
