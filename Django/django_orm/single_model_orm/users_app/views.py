@@ -26,7 +26,7 @@ def index(request):
     #     for value in p_v:
     #         print(p_v[value])
     context = {
-        # "all_users": User.objects.all()
+        "users": User.objects.all(),
         "all_users": users
     }
     return render(request, 'index.html', context)

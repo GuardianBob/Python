@@ -35,6 +35,18 @@
                                 {% endfor %}
                             </tr>
                         {% endfor %}
+                        <!-- ========Provided Solution============
+                        ---Utilizes a property from models and calls directly from database list----
+
+                        {% for user in users %}
+                            <tr>
+                                <th>{{ user.id }}</th>
+                                <th>{{ user.full_name }}</th>
+                                <th>{{ user.email_address }}</th>
+                                <th>{{ user.age }}</th>
+                            </tr>
+                        {% endfor %}
+                        ==============End Solution================== -->
                     </tbody>
                 </table>
             </div>
@@ -72,6 +84,29 @@
                     </div>
                 </div>
             </form>
+
+            <!-- ======================PROVIDED SOLUTION FORM=======================
+            <form action="/create" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" name="age" id="age" class="form-control">
+                </div>
+                <button class="btn btn-primary">Submit</button>
+            </form>
+            ====================================================================== -->
         </div>
     </div>
 </body>
