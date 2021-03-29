@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Dojos & Ninjas</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="row justify-content-center">  
+                <div class="col-md-5 py-1">           
+                    <form action="submit" method="post">
+                        {% csrf_token %}  
+                        <h3 class="text-center">Add a Dojo</h3>
+                        <label for="dName" class="col-sm-4">Name</label>
+                        <input type="text" name="dName" id="dName" size="20px" class="my-2 mx-1">
+                        <label for="dCity" class="col-sm-4">City</label>
+                        <input type="text" name="dCity" id="dCity" size="20px" class="my-2 mx-1">  
+                        <label for="dState" class="col-sm-4">State</label>
+                        <input type="text" name="dState" id="dState" size="20px" class="my-2 mx-1" maxlength="2">
+                        <label for="submitDojo" class="col-sm-4"></label>                      
+                        <input type="submit" name="submitDojo" value="Add" class="px-2 m-1">
+                    </form>
+                </div>
+                <div class="col-md-5 py-1">           
+                    <form action="submit" method="post">
+                        {% csrf_token %}  
+                        <h3 class="text-center">Add a Ninja</h3>
+                        <label for="first_name" class="col-sm-4">First Name</label>
+                        <input type="text" name="first_name" id="first_name" size="20px" class="my-2 mx-1">
+                        <label for="last_name" class="col-sm-4">Last Name</label>
+                        <input type="text" name="last_name" id="last_name" size="20px" class="my-2 mx-1">  
+                        <label for="dojo" class="col-sm-4">Dojo</label>
+                        <select id="dojo" name="dojo" class="my-2 mx-1">
+                            {% for dojo in dojos %}
+                            <option value="{{ dojo.name }}">{{ dojo.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="submitNinja" class="col-sm-4"></label>                                           
+                        <input type="submit" name="submitNinja" value="Add" class="px-2 m-1">
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col text-center">
+                    <h3>All the Dojos</h3>                    
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    {% for dojo in dojos %}
+                        <p><b>Ninjas at the {{ dojo.name }} Dojo </b></p>
+                        <ul class="ml-5">
+                            {% for ninja in ninjas %}
+                                {% if ninja.dojo == dojo %}
+                                    <li>{{ ninja.first_name }} {{ ninja.last_name }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
