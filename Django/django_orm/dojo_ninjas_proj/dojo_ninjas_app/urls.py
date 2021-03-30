@@ -9,4 +9,11 @@ urlpatterns = [
 ]
 
 
+# ====================PROVIDED SOLUTION====================
+# urlpatterns = [
+#     path('', views.index),
+#     path('ninjas/create', views.create_ninja),
+#     path('dojos/create', views.create_dojo),
+# ]
+
 
