@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <title>Add Show</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="row justify-content-end">
+                <a href="../shows">Go Back</a>
+            </div>
+            <form action="create" method="post">
+            {% csrf_token %}
+                <div class="col-md-5">
+                    <div class="form-group">                    
+                        <label for="title">Title:</label>
+                        <input type="text" name="title" id="title" class="form-control">
+                        <label for="network">Network:</label>
+                        <input type="text" name="network" id="network" class="form-control">
+                        <label for="release">Release Date:</label>
+                        <input type="date" name="release" id="release" class="form-control"> 
+                        <label for="description">Description:</label>  
+                        <textarea class="form-control" rows="3" id="description" name="description"></textarea>                        
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>                
+            </form>
+        </div>
+    </div>
+</body>
+</html>
