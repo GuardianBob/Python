@@ -6,3 +6,4 @@ my_environments/*
 Django/django_intro/Meyer_Jesse_timeDisplay.zip
 *.bat
 *.zip
+Django/deploy_gunicorn_error.JPG
