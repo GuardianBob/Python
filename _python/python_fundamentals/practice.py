@@ -54,17 +54,37 @@
 
 # 
 
-import json, requests
+# import json, requests
 
-xUrl = 'https://pokeapi.co/api/v2/pokemon/5/'
-# y = json.loads(xUrl)
-# for i in y["moves"]: #["abilities"]:
-#     print(i["move"]["name"]) #["ability"]["name"])
+# xUrl = 'https://pokeapi.co/api/v2/pokemon/5/'
+# # y = json.loads(xUrl)
+# # for i in y["moves"]: #["abilities"]:
+# #     print(i["move"]["name"]) #["ability"]["name"])
 
-pUrl = requests.get(xUrl)
-cvt = pUrl.json()
-print(cvt['name'])
-# y = json.loads(pUrl.read())
-# print(y['name']) #["ability"]["name"])
+# pUrl = requests.get(xUrl)
+# cvt = pUrl.json()
+# print(cvt['name'])
+# # y = json.loads(pUrl.read())
+# # print(y['name']) #["ability"]["name"])
 
-users.objects.create(first_name)
+# users.objects.create(first_name)
+
+# import bcrypt
+# # pw = b"test"
+# # .encode() just adds a "b" in front of the password in apostrphies: b'passwprd'.
+# hash1 = bcrypt.hashpw('test'.encode(), bcrypt.gensalt())
+# print(hash1)
+
+# if bcrypt.checkpw('test'.encode(), hash1):
+#     print("Matched")
+# else:
+#     print("nope")
+
+import datetime
+date1 = datetime.date.today()
+minDate = datetime.date(date1.year + 13, date1.month, date1.day)
+print(minDate)
+if date1 > minDate:
+    print("greater")
+else:
+    print("Less")

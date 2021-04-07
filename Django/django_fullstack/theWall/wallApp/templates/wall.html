@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap 4.6 CSS, JQuery, AJAX all-in-one -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <title>Document</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            document.getElementByClassName("delete").disabled = true;       
+            document.getElementByClassName("delete").hidden = true;     
+            $("#checkPass").keyup(checkPass);
+            $("#passwd2").keyup(passEnbl);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row align-items-center justify-content-between border-bottom border-dark">
+            <div class="col-md-9">
+                <h4>CodingDojo Wall</h4>
+            </div>
+            <div class="col-md-2">
+                <h6>Welcome {{ user.first_name }}</h6>
+            </div>
+            <div class="col-md-1">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+        <!-- Form to post Message -->
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-10">
+                <form action="post/message" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="new_message"><h5>Post a message:</h5></label>
+                        <textarea class="form-control" rows="3" id="new_message" name="new_message"></textarea>
+                        <div class="row justify-content-end"><input type="submit" value="Post a message" class="px-2 my-2 mr-3  btn-primary" id="submit"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Insert messages here -->
+        <!-- <div class="row"> -->
+            {% for message in messages %}
+            <div class="row ml-10 justify-content-center">
+                <div class="col-md-10 ml-5">
+                    <div class="row justify-content-between">
+                        <div class="col-md-4 ">
+                            <h6>{{ message.user.full_name }} - {{ message.created_at|date:"F jS Y" }} </h6>
+                        </div>
+                        {% if message.user.id == user.id %}
+                            <div class="col-md-3">
+                                <a href="/delete/message/{{ user.id }}/{{ message.id }}" class="delete">Delete Post</a>
+                                <span id="del_msg">{{ errors.del_msg }}</span>
+                            </div>
+                        {% endif %}
+                    </div>       
+                    <p> {{ message.message }} </p>                    
+                </div>
+                {% for comment in message.comments.all %}
+                <div class="col-md-9">
+                    <div class="row justify-content-between">
+                        <div class="col-md-4 ">
+                            <h6>{{ comment.user.full_name }} - {{ comment.created_at|date:"F jS Y" }} </h6>
+                        </div>
+                        {% if comment.user.id == user.id %}
+                            <div class="col-md-3">
+                                <a href="/delete/comment/{{ user.id }}/{{ comment.id }}" class="delete">Delete Post</a>
+                                <span id="del_msg">{{ errors.del_cmt }}</span>
+                            </div>   
+                        {% endif %}  
+                    </div>
+                    <p> {{ comment.comment }} </p>                    
+                </div>
+                {% endfor %}
+                <div class="col-md-10 ml-4">
+                    <form action="post/comment" method="post">
+                        {% csrf_token %}
+                        <div class="form-group ml-4">
+                            <label for="new_comment"><h5>Post a comment:</h5></label>
+                            <textarea class="form-control" rows="3" id="new_comment" name="new_comment"></textarea>
+                            <input type="hidden" name="message_id" value="{{ message.id }}">
+                            <div class="row justify-content-end"><input type="submit" value="Post a comment" class="px-2 my-2 mr-3  btn-primary" id="submit"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- <div class="row my-5 justify-content-center">
+                <div class="col-md-10">
+                    <form action="post/comment" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="message"><h5>Post a message:</h5></label>
+                            <textarea class="form-control" rows="3" id="message" name="message"></textarea>
+                            <input type="hidden" name="message_id" value="{{ messages.message.id }}">
+                            <div class="row justify-content-end"><input type="submit" value="Post a message" class="px-2 my-2 mr-3  btn-primary" id="submit"></div>
+                        </div>
+                    </form>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</body>
+</html>

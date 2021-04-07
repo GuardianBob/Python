@@ -5,7 +5,7 @@ from django.utils.crypto import get_random_string
 
 def index(request):
     
-    if request.session["count1"] is None: 
+    if not "count" in request.session: 
         request.session["count1"] = 0
     rand = get_random_string(length=14)
     request.session["rand"] = rand.upper()
