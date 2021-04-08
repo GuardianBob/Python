@@ -23,18 +23,17 @@ def register(request):
         request.session['fName'] = request.POST['fName']
         request.session['lName'] = request.POST['lName']
         request.session['email'] = request.POST['email']
-        request.session['birthday'] = request.POST['birthday']
         request.session['errors'] = errors    
         return redirect('/')  
     else:
         passwd = request.POST['passwd']
         uPass = bcrypt.hashpw(passwd.encode(), bcrypt.gensalt()).decode()
-        User.objects.create(first_name=request.POST['fName'], last_name=request.POST['lName'], email=request.POST['email'], password=uPass, birthday=request.POST['birthday'])
+        User.objects.create(first_name=request.POST['fName'], last_name=request.POST['lName'], email=request.POST['email'], password=uPass)
         request.session['name'] = request.POST['fName']
         request.session["login"] = "registered"
         usr = User.objects.get(email=request.POST['email'])
         request.session["user_id"] = usr.id
-        return redirect('/wall')
+        return redirect('/main')
     
 def login(request):
     if request.method == "GET":
@@ -51,7 +50,7 @@ def login(request):
     else:
         usr = User.objects.get(email=request.POST['email2'])
         request.session["user_id"] = usr.id
-        return redirect('/wall')
+        return redirect('/main')
 
 def success(request):
     if not 'name' in request.session: 
