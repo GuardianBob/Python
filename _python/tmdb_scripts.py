@@ -1,7 +1,10 @@
 import tmdbsimple as tmdb
 import random
+import requests
+
 
 tmdb.API_KEY = '1185412e00a20896217f777462cbdaff'
+tmdb.REQUESTS_SESSION = requests.Session()
 
 mGenres = {    
     'action':28,
@@ -60,9 +63,14 @@ response = discover.movie(with_genres=prnt1)
 #         print(j['title'])
 #         i +=1
 num = []
+# for i in range(0, 10):    
+#     rnd = random.randint(0,len(discover.results) - 1)
+#     if rnd not in num:
+#         num.append(rnd)
+#         print(discover.results[rnd]['title'])
+#     # print(num)
 for i in range(0, 10):    
     rnd = random.randint(0,len(discover.results) - 1)
     if rnd not in num:
         num.append(rnd)
         print(discover.results[rnd]['title'])
-    # print(num)

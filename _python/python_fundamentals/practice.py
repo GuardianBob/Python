@@ -80,11 +80,81 @@
 # else:
 #     print("nope")
 
-import datetime
-date1 = datetime.date.today()
-minDate = datetime.date(date1.year + 13, date1.month, date1.day)
-print(minDate)
-if date1 > minDate:
-    print("greater")
-else:
-    print("Less")
+# import datetime
+# date1 = datetime.date.today()
+# minDate = datetime.date(date1.year + 13, date1.month, date1.day)
+# print(minDate)
+# if date1 > minDate:
+#     print("greater")
+# else:
+#     print("Less")
+
+# string = "First Second Last"
+# fName = string.split(" ", 1)[0]
+# lName = string.split(" ", 1)[1]
+# print(fName, " : ", lName)
+
+# import json
+# # Python's built-in module for opening and reading URLs
+# from urllib.request import urlopen
+
+# while True:
+#     api = "https://www.googleapis.com/books/v1/volumes?q=intitle:"
+#     in1 = input("Enter title: ").strip()
+#     title = in1.replace(" ", "%20")
+#     key1 = "&key=AIzaSyC0QCgMWSfhNnDAMQ6S6--fNE1J2Ul5LEU"
+
+#     resp = urlopen(api + title + "")
+#     # parse JSON into Python as a dictionary
+#     book_data = json.load(resp)
+
+#     # create additional variables for easy querying
+#     volume_info = book_data["items"][0]["volumeInfo"]
+#     author = volume_info["authors"]
+#     # practice with conditional expressions!
+#     prettify_author = author if len(author) > 1 else author[0]
+
+#     # display title, author, page count, publication date
+#     # fstrings require Python 3.6 or higher
+#     # \n adds a new line for easier reading
+#     print(f"\nTitle: {volume_info['title']}")
+#     print(f"Author: {prettify_author}")
+#     print(f"Page Count: {volume_info['pageCount']}")
+#     print(f"Publication Date: {volume_info['publishedDate']}")
+#     print("\n***\n")
+
+#     # ask user if they would like to enter another isbn
+#     user_update = input("Would you like to enter another ISBN? y or n ").lower().strip()
+
+#     if user_update != "y":
+#         print("May the Zen of Python be with you. Have a nice day!")
+#         break # as the name suggests, the break statement breaks out of the while loop
+
+
+# import pytz
+# for tz in pytz.all_timezones:
+#     print(tz)
+
+# def local_time_update(infos):
+#     now = datetime.datetime.now()
+#     local_now = now.astimezone()
+#     local_tz = local_now.tzinfo
+#     for info in infos:
+#         time1 = info.created_at         
+#         utc = time1.replace(tzinfo=pytz.UTC) 
+#         localT = utc.astimezone(local_tz)
+#         info.created_at = localT
+#         # print(localT)
+#     return infos
+
+
+# def local_time_single(time1):
+#     now = datetime.datetime.now()
+#     local_now = now.astimezone()
+#     local_tz = local_now.tzinfo
+#     utc = time1.replace(tzinfo=pytz.UTC)
+#     localT = utc.astimezone(local_tz)
+#     # # info.created_at = localT
+#     # # localT = timezone.localdate(time1)    
+#     print(time1, " : ", localT)
+#     return

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>TMDB Movie Search</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap 4.6 CSS, JQuery, AJAX all-in-one -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row" id="data_table">
+            <div class="table-responsive">
+                <table class="table table-striped table-s">
+                    <thead>
+                        <tr>                           
+                            <th scope="col">Poster</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Release Date</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Save</th>
+                        </tr>
+                    </thead>
+                    <tbody>                        
+                        {% for movie in movies %}                        
+                            <tr>
+                                <td scope="col"><a href="https://www.themoviedb.org/movie/{{ movie.movieID }}" target="_blank"><img src="{{ movie.posterImg }}" alt="{{ movie.movieID }}" width=100></a></td>
+                                <td scope="col">{{ movie.title }}</td>
+                                <td scope="col">{{ movie.rating }}</td>   
+                                <td scope="col">{{ movie.date }}</td>
+                                <td scope="col">{{ movie.descr }}</td>
+                                <td scope="col text-sm">
+                                    <a href="#">Favorite</a> | 
+                                    <a href="#">Watch Later</a>
+                                </td>
+                            </tr>                        
+                        {% endfor %}
+                    </tbody>
+                </table>                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
