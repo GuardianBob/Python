@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
 import tmdbsimple as tmdb
 import random, datetime
+from loginApp.models import User
+import datetime
 # from .keywords import keywords as kWords
 
 tmdb.API_KEY = '1185412e00a20896217f777462cbdaff'
@@ -131,26 +133,45 @@ def rand_movie(postData):
     return movies
 
 def index(request):
+    user = User.objects.get(id=request.session['user_id'])  
+    date =  datetime.datetime.now()
+    yrNow = date.year
+    past = date - datetime.timedelta(days=(5*365.24))
+    yrPast = past.year
+    # print(yrNow, " : ", yrPast)    
     context = {
         'mGenres': mGenres,
         'sortBy': sortBy,
+        'user': user,
+        'yearRange': range(1960, yrNow + 1),
+        'rateRange': range(0,10),
+        'voteRange': range(0,1000, 100),
+        'yrNow': yrNow,
+        'yrPast': yrPast
     }
-    # if ['startYear'] in request.session:
-    #     context[user_in] = request.session
+    if 'values' in request.session:
+        context['info'] = request.session['values']
+        # print(context['info'])
     return render(request, 'index.html', context)
 
 def search(request):
-    if request.method == "GET":
+    if request.method != "POST":
         return redirect('/')
-    # request.session = request.POST
+    user = User.objects.get(id=request.session['user_id'])
+    for key in request.POST:
+        request.session['values'] = request.POST
+    # print(request.session['values'])
     if 'random' in request.POST:
         movies = rand_movie(request.POST)
     else:
         movies = get_movies(request.POST)
     context = {
-        'movies': movies
+        'movies': movies,
+        'user': user,
     }
     return render(request, 'results.html', context)
+
+
 
 
 
