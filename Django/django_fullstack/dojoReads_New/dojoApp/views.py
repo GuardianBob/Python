@@ -22,7 +22,7 @@ def books(request):
     context = {
         'reviews': reviews,
         "user": User.objects.get(id=user_id),
-        'books': Book.objects.all()
+        'books': Book.objects.order_by('title')
     }
     return render(request, 'books.html', context)
 
@@ -83,7 +83,7 @@ def update(request, bid):
         user = User.objects.get(id=request.session['user_id'])
         book = Book.objects.get(id=bid)
         review = Review.objects.create(review=request.POST['review'], rating=request.POST['rating'], book=book, user=user)
-    return redirect(f'/cl/info/{bid}')
+    return redirect(f'/info/{bid}')
 
 def clear(request, page, bid=None):
     if 'errors' in request.session:

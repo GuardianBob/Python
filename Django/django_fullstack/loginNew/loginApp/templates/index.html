@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>User Registration and Login</title>
+    <script type="text/javascript">
+        function checkPass() {
+            var reg_pass = $("#reg_password").val();
+            var checkPass = $("#check_pass_r").val();            
+            if ($("#check_pass_r").val() == $("#reg_password").val()) {
+                $("#c_pass").html("");
+                $("#submit").attr("disabled", false);
+            } else {
+                $("#c_pass").html("Passwords do not match!");
+                $("#submit").attr("disabled", true);
+            }
+        } 
+        function passEnbl() {
+            var login_password = $("#login_password").val();
+            if (login_password.length >= 8) {
+                $("#login").attr("disabled", false)
+            } else {                 
+                $("#login").attr("disabled", true)
+            }
+        }
+
+        function showPass() {
+            var reg_password = document.getElementById("reg_password");
+            if (reg_password.type === "password") {
+                reg_password.type = "text";
+            } else {
+                reg_password.type = "password";
+            }
+        }
+
+        $(document).ready(function () {
+            $("submit").attr("disabled", true)      
+            $("login").attr("disabled", true)    
+            $("#check_pass_r").keyup(checkPass);
+            $("#login_password").keyup(passEnbl);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row mx-5">
+            <div class="col-md-6">
+                <h3>Registration</h3>                                    
+                <form action="register" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ register_form }}
+                        <span class="errmsg" id="c_pass"></span></label><br>
+                        <input type="checkbox" onclick="showPass()">  Show Password <hr>
+                        <input type="submit" value="Register" class="px-2 my-2" id="submit" disabled>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h3>Login</h3>                                    
+                <form action="login" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">        
+                        {{ login_form }}
+                        <input type="submit" value="Login" class="px-2 my-2" id="login" disabled>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

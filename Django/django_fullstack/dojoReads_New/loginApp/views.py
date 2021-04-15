@@ -3,60 +3,47 @@ from .models import User
 from django.contrib import messages
 from django.contrib.auth import logout
 import bcrypt
+from .forms import Register_Form, Login_Form
 
-def index(request):
-    context = {'data': request.session}
-    if 'errors' in request.session:    
-        context.update({'errors': request.session['errors']})
-    if 'lErrors' in request.session:
-        context.update({'lErrors': request.session['lErrors']})
+def index(request, register_form=Register_Form(), login_form=Login_Form()):
+    context = {
+        'login_form': login_form,
+        'register_form' : register_form
+        }
     return render(request, 'index.html', context)
 
-def register(request):
-    if request.method == "GET":
+def register(request):    
+    if request.method != "POST":
         return redirect("/")
-    request.session.flush()
-    # NOTE: Start of validating single full name entry
-    # user_info = request.POST
-    # name = request.POST['fullName'].split(" ", 1)
-    # fName = name[0]
-    # lName = name[1]
-    # user_info.update({'fName': fName})
-    # user_info.update({'lName': fName})
-    errors = User.objects.validator(request.POST)
-    if len(errors) > 0:
-        for key, value in errors.items():
-            messages.error(request, value)
-        request.session['fName'] = request.POST['fName']
-        request.session['lName'] = request.POST['lName']
-        request.session['email'] = request.POST['email']
-        request.session['errors'] = errors    
-        return redirect('/')  
+    check_form = Register_Form(request.POST)
+    if not check_form.is_valid():
+        login_form = Login_Form()
+        context = { 
+            'register_form': check_form,
+            'login_form' : login_form 
+            }        
+        return render(request, 'index.html', context)
     else:
-        passwd = request.POST['passwd']
+        passwd = request.POST['reg_password']
         uPass = bcrypt.hashpw(passwd.encode(), bcrypt.gensalt()).decode()
-        User.objects.create(first_name=request.POST['fName'], last_name=request.POST['lName'], email=request.POST['email'], password=uPass)
-        request.session['name'] = request.POST['fName']
-        request.session["login"] = "registered"
-        usr = User.objects.get(email=request.POST['email'])
-        request.session["user_id"] = usr.id
+        user = User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], password=uPass)
+        request.session["user_id"] = user.id
         return redirect('/books')
     
 def login(request):
-    if request.method == "GET":
+    if request.method != "POST":
         return redirect("/")
-    request.session.flush()
-    passwd = bcrypt.hashpw(request.POST['passwd2'].encode(), bcrypt.gensalt())
-    lErrors = User.objects.checkLogin(request.POST)
-    if len(lErrors) > 0:
-        for key, value in lErrors.items():
-            messages.error(request, value)
-            request.session['lErrors'] = lErrors
-            request.session['email2'] = request.POST['email2']
-        return redirect('/')
+    check_form = Login_Form(request.POST)
+    if not check_form.is_valid():
+        register_form = Register_Form()
+        context = { 
+            'register_form': register_form,
+            'login_form' : check_form 
+            }
+        return render(request, 'index.html', context)
     else:
-        usr = User.objects.get(email=request.POST['email2'])
-        request.session["user_id"] = usr.id
+        user = User.objects.get(email=request.POST['login_email'])
+        request.session["user_id"] = user.id
         return redirect('/books')
 
 def success(request):

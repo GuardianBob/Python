@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/loginstyle.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>{{ page_title }}</title>
+</head>
+<body>
+    <div class="navigation">
+        {% block navbar %}
+        {% include nav %}
+        {% endblock navbar%}
+    </div>
+    <div class="row justify-content-around my-2">
+        <div class="col-lg-8 justify-content-between">
+            <h4>Manage Users</h4>
+            {% if admin is True %}
+                <a class="btn btn-primary px-3" href="/users/new" role="button">Add New</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row justify-content-around">
+        <div class="col-lg-8">
+            <table class="table table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">User Level</th>
+                        {% if admin is True %}
+                            <th scope="col">Actions</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td><a href="/users/show/{{ user.id }}"></a>{{ user.full_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.created_at }}</td>
+                            <td>
+                                {% if user.user_level is True %}
+                                    Admin
+                                {% else %}  
+                                    Normal
+                                {% endif %}
+                            </td>
+                            {% if admin is True %}
+                                <td>
+                                    <a href="#">Edit</a>
+                                    <span> | </span>
+                                    <a href="#">Remove</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
