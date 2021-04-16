@@ -17,6 +17,7 @@ class CommentForm(forms.Form):
     pass
 
 class UpdateUserForm(forms.Form):
+    # user_id = forms.CharField(max_length=200, widget=forms.TextInput)
     first_name = forms.CharField(max_length=200, widget=forms.TextInput)
     last_name = forms.CharField(max_length=200, widget=forms.TextInput)  
     email = forms.EmailField(max_length=200, widget=forms.EmailInput)
@@ -31,25 +32,31 @@ class UpdateUserForm(forms.Form):
             self.fields[name].widget.attrs.update({
                 'class' : 'form-control',
             })
+            # self.fields['description'].widget.attrs.update({
+            #     'class' : 'form-control',
+            #     'id': 'des',
+            # })
         
     def clean(self):
         super(UpdateUserForm, self).clean()
         first_name = self.cleaned_data.get('first_name')
         last_name = self.cleaned_data.get('last_name')
         email = self.cleaned_data.get('email')
+        user_level = self.cleaned_data.get('user_level')
                 
-        def check_string(string, length, varName):
-            if len(string) < length: 
-                self.errors[f"{varName}"] = self.error_class([
-                    f'Input must be at least 2 characters.'])
+        # def check_string(string, length, varName):
+        #     if len(string) < length: 
+        #         self.errors[f"{varName}"] = self.error_class([
+        #             f'Input must be at least 2 characters.'])
+        #         print('error failed')
 
-        check_string(first_name, 2, 'first_name')
-        check_string(last_name, 3, 'last_name')
+        # check_string(first_name, 2, 'first_name')
+        # check_string(last_name, 3, 'last_name')
                 
         return self.cleaned_data
 
 class UpdatePasswordForm(forms.Form):
-    user_id = forms.HiddenInput()
+    user_id = forms.CharField(max_length=200, widget=forms.TextInput)
     password = forms.CharField(max_length=20, min_length=8, widget=forms.PasswordInput, required=False)
     check_password = forms.CharField(max_length=20, min_length=8, widget=forms.PasswordInput, required=False)
 
@@ -67,6 +74,10 @@ class UpdatePasswordForm(forms.Form):
             'id': 'check_password',
             'onChange': 'checkPass();'
         })
+        self.fields['user_id'].widget.attrs.update({
+            'class' : 'form-control',
+            'id': 'user_id',
+        })
         self.fields['password'].label = 'Password'
         self.fields['check_password'].label = 'Password Confirmation'
 
@@ -75,10 +86,12 @@ class UpdatePasswordForm(forms.Form):
         password = self.cleaned_data.get('password')
         user_id = self.cleaned_data.get('user_id')
                 
-        user = User.objects.get(id=user_id)         
+        user = User.objects.get(id=user_id)       
 
         
         if bcrypt.checkpw(password.encode(), user.password.encode()):
-            self.errors[f'password'] = self.error_class([
+            self.errors['password'] = self.error_class([
                 f'Password cannot be the same as previous password.'])
+
+        return self.cleaned_data
 

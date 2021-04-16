@@ -32,40 +32,43 @@
 <body>
     <div class="navigation">
         {% block navbar %}
-        {% include nav %}
+        {% include nav with user_link=user_id %}
         {% endblock navbar%}
     </div>
-    <div class="row justify-content-center">
-        <h4>Edit {{ form_title }}</h4>
-        <p class="" id="">{{ update }}</p>
+    <div class="row justify-content-center mx-1">
+        <div class="col-md-10">
+            <h4>Edit {{ form_title }}</h4><br>
+            <p class="text-success" id="">{{ update }}</p>
+        </div>
     </div>
-    <div class="row justify-content-around">        
+    <div class="row justify-content-around mx-1">        
         <div class="col-md-3 justify-content-center">
             <h6>Edit Information</h6>
-            <form action="/update_user" method="post">
+            <form action="/update_user" method="post" id="user_update">
                 {% csrf_token %}
                 <div class="form-group">
-                    {{ form.email.error }}
+                    {{ form.email.errors }}
                     {{ form.email.label_tag }}
                     <input type="email" name="email" id="email" class="form-control mb-1" value="{{ user.email }}">
-                    {{ form.first_name.error }}
+                    {{ form.first_name.errors }}
                     {{ form.first_name.label_tag }}
                     <input type="first_name" name="first_name" id="first_name" class="form-control mb-1" value="{{ user.first_name }}">
-                    {{ form.last_name.error }}
+                    {{ form.last_name.errors }}
                     {{ form.last_name.label_tag }}
-                    <input type="last_name" name="last_name" id="last_name" class="form-control mb-1" value="{{ user.last_name }}">
-                    <label for="user_level">User Level:</label>
-                    {% if admin is True %}
+                    <input type="last_name" name="last_name" id="last_name" class="form-control mb-1" value="{{ user.last_name }}">                    
+                    {% if current_user.user_level is True %}
+                        <label for="user_level">User Level: </label>
                         <select name="user_level" id="user_level" class="btn btn-outline-secondary dropdown-toggle form-control ">
-                            {% for item in level_select %}   
-                                {% if user_level == item %}                    
-                                    <option value="{{ item }}" selected>{{ item }}</option>
+                            {% for key, value in level_select.items %}
+                                {% if user.user_level == key %}                    
+                                    <option value="{{ key }}" selected>{{ value }}</option>
                                 {% else %}
-                                    <option value="{{ item }}">{{ item }}</option>
+                                    <option value="{{ key }}">{{ value }}</option>
                                 {% endif %}
                             {% endfor %}
                         </select><br>
-                        <!-- <input type="user_level" name="user_level" id="user_level" class="form-control w-75" value="{{ user.user_level }}"> -->
+                    {% else %}
+                        <input type="user_level" name="user_level" id="user_level" class="form-control w-75" value="{{ user.user_level }}" hidden>
                     {% endif %}
                     <input type="user_id" name="user_id" id="user_id" class="form-control mb-1" value="{{ user.id }}" hidden>
                     <div class="row justify-content-end px-3">
@@ -79,10 +82,9 @@
             <form action="/update_password" method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    {{ password_form.password.error }}
+                    {{ password_form.password.errors }}
                     {{ password_form.password.label_tag }}
                     <input type="password" name="password" id="password" class="form-control mb-1" >
-                    {{ password_form.check_password.error }}
                     {{ password_form.check_password.label_tag }}
                     <span class="errmsg" id="c_pass"></span><br>
                     <input type="password" name="check_password" id="check_password" class="form-control mb-1">
@@ -91,8 +93,16 @@
                         <input type="submit" value="Update Password" class="px-2 my-2 btn btn-success" id="upd_pass">
                     </div>
                 </div>
-            </form>
-            <span class="" id="">{{ update }}</span><br>
+            </form>            
+        </div>
+        <div class="col-md-8 justify-content-left">
+            {% if not current_user.id == user.id %}
+                <input type="textarea" name="description" id="description" class="form-control mb-1" value="{{ user.description }}" form="user_update" hidden>
+            {% else %}
+                {{ form.description.errors }}
+                {{ form.description.label_tag }}
+                <textarea name="description" id="description" class="form-control mb-1" rows="4" form="user_update">{{ user.description }}</textarea>
+            {% endif %}
         </div>
     </div>
     

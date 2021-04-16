@@ -38,7 +38,7 @@ def register(request, register_form=Register_Form()):
 def validate_register(request):    
     if request.method != "POST":
         return redirect("/register")
-    check_form = Register_Form(request.POST)
+    check_form = Register_Form(request.POST)    
     if not check_form.is_valid():
         login_form = Login_Form()
         context = { 
