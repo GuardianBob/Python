@@ -8,3 +8,10 @@ Django/django_intro/Meyer_Jesse_timeDisplay.zip
 *.zip
 Django/deploy_gunicorn_error.JPG
 Django/django_fullstack/amadon/
+Django/tmdbDjango2/
+Django/tmdbDjango3/
+Django/portfolio/
+Django/tmdbDjango.Desktop/
+*.sqlite3
+*.sqlite3
+*.env
